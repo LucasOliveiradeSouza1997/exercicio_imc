@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IMC</title>
+		<meta charset="UTF-8">
+		<style type="text/css">
+			body{
+				background: linear-gradient(90deg,blueviolet,cyan);
+				font-size: large;
+			}
+			div{
+				background: white;
+				position:absolute;
+				top:50%;
+				left:50%;
+				transform: translate(-50%,-50%);
+				padding:60px;
+				border-radius: 20px;
+			}
+			button{
+				background-color: blueviolet;
+				color:white;
+				border-radius: 5px;
+			}	
+		</style>		
+		<script>
+			function calculate() {
+				const peso = document.getElementById('peso').value;
+				let altura = document.getElementById('altura').value;
+				let mensagem = "";
+				let imc = 0;
+				if(peso == ""){
+					mensagem = "Não foi preenchido o peso";
+				}else if(altura == ""){
+					mensagem = "Não foi preenchido a altura";
+				}else if(peso <= 0){
+					mensagem = "O peso nao pode ser igual ou menor que zero";
+				}else if(altura <=0){
+					mensagem = "A altura nao pode ser igual ou menor que zero";
+				}else{
+					altura /= 100;
+					imc = (peso / (altura * altura)).toFixed(2);
+				
+					if(imc < 18.5){
+						mensagem = "Magreza";
+					}else if(imc <= 24.9){
+						mensagem = "Normal";
+					}else if(imc <= 30){
+						mensagem = "Sobrepeso";
+					}else {
+						mensagem = "Obesidade";
+					}
+				}
+				document.getElementById('mensagem').innerHTML = "Resultado: " + mensagem;
+				document.getElementById('imc').innerHTML = "IMC: " + imc;	
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<h1>Calcular o IMC:</h1>
+			<label>Digite o peso em KG:</label><br>
+			<input type="number" id="peso"><br><br>
+			<label>Digite a altura em CM:</label><br>
+			<input type="number" id="altura"><br><br>
+			<button onclick="calculate()">Calcular</button><br><br>
+			<label id='mensagem'></label><br>	
+			<label id='imc'></label><br>	
+		</div>
+	</body>
+</html>
